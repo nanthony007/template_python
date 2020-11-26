@@ -20,6 +20,9 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 # Copy requirements file
 COPY pyproject.toml poetry.lock /usr/src/app/
 
+# Install the dependencies.
+RUN poetry install --no-root --no-dev
+
 # Copy the current directory contents into the container at
 COPY . /usr/src/app
 
