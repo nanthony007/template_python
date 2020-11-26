@@ -10,5 +10,5 @@ def hello(x: str = "") -> str:
         str: Hello statement.
     """
     if x == "":
-        return "Hello there."
+        return "Hello there, friend."
     return f"Hello there, {x}."
