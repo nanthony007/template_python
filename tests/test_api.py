@@ -9,4 +9,4 @@ def test_hello() -> None:
     performs as expected with input and its default value.
     """
     assert api.hello("Nick") == "Hello there, Nick."
-    assert api.hello() == "Hello there."
+    assert api.hello() == "Hello there, friend."
