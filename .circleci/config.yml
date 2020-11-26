@@ -9,13 +9,25 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Poetry
+          command: |
+            pip3 install poetry
+      - run:
           name: Install Python Dependencies
           command: |
-            pip3 install -r requirements.txt --no-cache-dir
+            poetry install
+      - run:
+          name: Format Code
+          command: |
+            poetry run black . --target-version py38
+      - run:
+          name: Format Imports
+          command: |
+            poetry run isort .
       - run:
           name: Lint Code
           command: |
-            flake8
+            poetry run flake8
   # API Tests
   test:
     docker:
@@ -24,31 +36,31 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Poetry
+          command: |
+            pip3 install poetry
+      - run:
           name: Install Python Dependencies
           command: |
-            pip3 install -r requirements.txt --no-cache-dir
+            poetry install
       - run:
           name: Run Tests
           command: |
-            coverage run -m pytest
+            poetry run pytest --color=yes
   # Build Docker Container And Deploy To Heroku
   docker-build-release:
     machine:
       enabled: true
     parameters:
       app-name:
-        description: 'The Heroku app name to which the application should be deployed'
+        description: 'python-sample projet'
         type: string
       app-type:
-        description: 'The Heroku app type (web or worker) of the application to be deployed'
+        description: 'Python web application'
         type: string
         default: 'web'
     steps:
       - checkout # Checkout code from github repository
-      - run:
-          name: View Files
-          command: |
-            ls -ll
       - run:
           name: Install Heroku CLI
           command: |

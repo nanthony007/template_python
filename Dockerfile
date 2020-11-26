@@ -1,5 +1,5 @@
 # Pull official python image
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+FROM tiangolo/uvicorn-gunicorn:python3.8
 
 # Declare maintainer of container
 LABEL NickAnthony nanthony007@gmail.com
