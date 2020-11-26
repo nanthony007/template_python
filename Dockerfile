@@ -11,11 +11,14 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /usr/src/app
 
-# Copy requirements file
-COPY ./requirements.txt /usr/src/app/requirements.txt
+# Install Poetry
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_HOME=/opt/poetry python && \
+    cd /usr/local/bin && \
+    ln -s /opt/poetry/bin/poetry && \
+    poetry config virtualenvs.create false
 
-# Install the dependencies.
-RUN pip3 install -r /usr/src/app/requirements.txt
+# Copy requirements file
+COPY pyproject.toml poetry.lock /usr/src/app/
 
 # Copy the current directory contents into the container at
 COPY . /usr/src/app
