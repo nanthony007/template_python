@@ -85,6 +85,19 @@ jobs:
           name: Release Deployed Container
           command: |
             heroku container:release << parameters.app-type >> -a << parameters.app-name >>
+  docs-deploy:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: Install Mkdocs
+          command: |
+            pip3 install mkdocs
+      - run:
+          name: Deploy Docs to GitHub Pages
+          command: |
+            mkdocs gh-deploy 
 machine:
   services:
     - docker
@@ -99,6 +112,7 @@ workflows:
     jobs:
       - lint # Linting is run for every branch.
       - test # Tests are run for every branch.
+      - docs-deploy # Deploy documentation to GitHub Pages
 
       # Staging [branch=staging]
       - docker-build-release:
