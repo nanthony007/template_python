@@ -116,7 +116,6 @@ workflows:
           requires:
             - lint
             - test
-            - docs-deploy
           app-name: '${APP_PREFIX}-production'
           filters:
             branches:
