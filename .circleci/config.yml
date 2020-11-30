@@ -97,7 +97,7 @@ jobs:
       - run:
           name: Deploy Docs to GitHub Pages
           command: |
-            mkdocs gh-deploy -f
+            mkdocs gh-deploy
 machine:
   services:
     - docker
