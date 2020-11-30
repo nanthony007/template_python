@@ -6,7 +6,7 @@ build:
 	@echo "Building dockerfile"
 	@bash scripts/build.sh
 
-run:
+run-container:
 	@echo "Building dockerfile..."
 	@bash scripts/build.sh
 	@echo "Running docker image..."
@@ -40,5 +40,17 @@ install:
 	@echo "Installing dependencies..."
 	@pip install poetry
 	@poetry install
+
+docs:
+	@echo "Serving documentation..."
+	@echo poetry run mkdocs serve
+
+deploy-docs:
+	@echo "Deploying documentation..."
+	@poetry run mkdocs gh-deploy
+
+run:
+	@echo "Running..."
+	@poetry run uvicorn main:app --reload
 
 .DEFAULT_GOAL := install
