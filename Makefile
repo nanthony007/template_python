@@ -36,5 +36,9 @@ test-cov:
 	@echo "Testing with Coverage..."
 	@poetry run pytest --cov
 
+install:
+	@echo "Installing dependencies..."
+	@pip install poetry
+	@poetry install
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := install
