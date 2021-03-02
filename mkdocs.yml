@@ -1,3 +1,10 @@
 site_name: My Docs FUN!
 remote_name: https://github.com/nanthony007/template_python
 remote_branch: gh-pages
+
+theme:
+  name: 'material'
+
+plugins:
+  - search
+  - mkdocstrings
